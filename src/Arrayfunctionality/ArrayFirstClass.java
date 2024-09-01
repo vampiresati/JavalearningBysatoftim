@@ -9,8 +9,9 @@ public class ArrayFirstClass {
     }
     String s=Arrays.toString(numberArray);
     System.out.println(s);
-    Object o=Arrays.toString(numberArray);
-    System.out.println(o);
+        Arrays.sort(numberArray);
+    System.out.println(Arrays.toString(numberArray));
+
     }
 
 }
