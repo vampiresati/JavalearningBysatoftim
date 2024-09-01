@@ -12,6 +12,10 @@ public class BinarySearchMethod {
         else {
             System.out.println("Name is found: "+names[found]+"at index: "+found);
         }
+        int []n1={1,2,3,4,5,6};
+        int []n2={1,2,3,4,5};
+        System.out.println(Arrays.equals(n1,n2));
+
     }
 
 }
