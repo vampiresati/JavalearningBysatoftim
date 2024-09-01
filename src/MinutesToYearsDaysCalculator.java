@@ -1,15 +1,15 @@
 public class MinutesToYearsDaysCalculator {
-
-    private static final int MIN_PER_HOUR = 60;
-    private static final int HOURS_PER_DAY = 24;
-    private static final int DAYS_PER_YEAR = 365;
-    private static final int MIN_PER_DAY = HOURS_PER_DAY * MIN_PER_HOUR;
-    private static final int MIN_PER_YEAR = MIN_PER_HOUR * HOURS_PER_DAY * DAYS_PER_YEAR;
     public static void main(String[] args) {
         printYearsAndDays(525600);
         printYearsAndDays(1051200);
         printYearsAndDays(561600);
     }
+    private static final int MIN_PER_HOUR = 60;
+    private static final int HOURS_PER_DAY = 24;
+    private static final int DAYS_PER_YEAR = 365;
+    private static final int MIN_PER_DAY = HOURS_PER_DAY * MIN_PER_HOUR;
+    private static final int MIN_PER_YEAR = MIN_PER_HOUR * HOURS_PER_DAY * DAYS_PER_YEAR;
+
     public static void printYearsAndDays(long minutes) {
 
         if (minutes < 0) {
