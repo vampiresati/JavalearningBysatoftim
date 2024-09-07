@@ -8,6 +8,8 @@ public class challengeMininarray {
         int[] b=readIntergers();
         int min=findMin(b);
         System.out.println(min);
+        min=findMinanotherlogic(b);
+        System.out.println(min);
         b=sortIntegers(b);
         System.out.println(b[0]);
     }
@@ -25,6 +27,16 @@ public class challengeMininarray {
             b[i]=Integer.parseInt(a[i].trim());
         }
         return b;
+    }
+
+    public static int findMinanotherlogic(int[] arr) {
+        int min=Integer.MAX_VALUE;
+        for(int i=0;i<arr.length;i++){
+            if(arr[i]<min){
+                min=arr[i];
+            }
+        }
+        return min;
     }
     public static int findMin(int[] arr) {
         Arrays.sort(arr);
