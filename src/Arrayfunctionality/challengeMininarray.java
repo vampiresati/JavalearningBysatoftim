@@ -22,7 +22,7 @@ public class challengeMininarray {
         int[] b=new int[a.length];
         System.out.println(Arrays.toString(a));
         for(int i=0;i<a.length;i++){
-            b[i]=Integer.parseInt(a[i]);
+            b[i]=Integer.parseInt(a[i].trim());
         }
         return b;
     }
