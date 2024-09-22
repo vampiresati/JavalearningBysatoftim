@@ -10,12 +10,22 @@ import java.util.Map;
 public class Mysqlconnection {
     public static void main(String[] args) {
         System.out.println("getting paramter from configuration file");
-        String [] sparams=connection_paramater();
-        for(String s:sparams){
-            System.out.println(s);
-        }
         Map<String,String> sparamsdict = connection_paramter_as_key_value();
-        System.out.println(sparamsdict.toString());
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection connection = DriverManager.getConnection(sparamsdict.get("url"), sparamsdict.get("username"), sparamsdict.get("password"));
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM tcs_status");
+            while (resultSet.next()) {
+                System.out.println("Data: " + resultSet.getString("uni"));
+            }
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
     }
     public static Map<String,String> connection_paramter_as_key_value(){
         Map<String,String> sparam=new HashMap<>();
@@ -83,5 +93,6 @@ public class Mysqlconnection {
             this.dbms = dbmsArg;
         }
     }
+
 
 }
