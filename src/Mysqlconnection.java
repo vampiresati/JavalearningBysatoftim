@@ -7,18 +7,17 @@ import java.util.Properties;
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.sql.SQLException;
 public class Mysqlconnection {
     public static void main(String[] args) {
         System.out.println("getting paramter from configuration file");
         Map<String,String> sparamsdict = connection_paramter_as_key_value();
+        Connection connection=null;
+
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection connection = DriverManager.getConnection(sparamsdict.get("url"), sparamsdict.get("username"), sparamsdict.get("password"));
-            Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM tcs_status");
-            while (resultSet.next()) {
-                System.out.println("Data: " + resultSet.getString("uni"));
-            }
+            connection = DriverManager.getConnection(sparamsdict.get("url"), sparamsdict.get("username"), sparamsdict.get("password"));
+            viewTcsTable(connection);
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -26,7 +25,31 @@ public class Mysqlconnection {
 
 
 
+
     }
+
+
+
+    public static void viewTcsTable(Connection con) throws SQLException {
+        String query = "select * from tcs_status";
+        try (Statement stmt = con.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+            while (rs.next()) {
+                String delivery_uuid = rs.getString("delivery_uuid");
+                int ticket_number = rs.getInt("ticket_number");
+                float 	begin_gal = rs.getFloat("begin_gal");
+                int equipment_id = rs.getInt("equipment_id");
+                int scan_type = rs.getInt("scan_type");
+                System.out.println(ticket_number + ", " + delivery_uuid + ", " + 	begin_gal +
+                        ", " + equipment_id + ", " + scan_type);
+            }
+        } catch (SQLException e) {
+            System.out.println("exception");
+
+        }
+    }
+
+
     public static Map<String,String> connection_paramter_as_key_value(){
         Map<String,String> sparam=new HashMap<>();
 
