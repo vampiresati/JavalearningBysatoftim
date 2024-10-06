@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.ResultSetMetaData;
+import java.sql.PreparedStatement;
 import java.util.Properties;
 import java.io.*;
 
@@ -54,6 +55,18 @@ public class database_connection {
             while (resultSet.next()) {
                 System.out.println("deviceId: " + resultSet.getString("deviceId")+"ticket _number"+resultSet.getLong("ticket_number"));
             }
+
+            //update query method
+            PreparedStatement pstmt;
+            pstmt = connection.prepareStatement("UPDATE tcs_status " + "SET DriverId = ? " + "WHERE deviceId = ? and  uni =?");
+            pstmt.setString(1, "786");
+            pstmt.setString(2, "00000000a68c3517");
+            pstmt.setInt(3, 109207);
+            System.out.println(pstmt);
+            pstmt.executeUpdate();
+
+
+
 
             // Close the connection
             connection.close();
