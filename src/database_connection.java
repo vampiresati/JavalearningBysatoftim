@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.sql.ResultSetMetaData;
 import java.util.Properties;
 import java.io.*;
 
@@ -42,9 +43,16 @@ public class database_connection {
             // Execute a query
             ResultSet resultSet = statement.executeQuery("SELECT * FROM tcs_status");
 
+
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+            int numberOfColumns = rsmd.getColumnCount();
+            for(int i=1;i<=numberOfColumns;i++){
+                System.out.println(rsmd.getColumnName(i)+','+rsmd.getColumnClassName(i));
+          
+            }
             // Process the result set
             while (resultSet.next()) {
-                System.out.println("Data: " + resultSet.getString("uni"));
+                System.out.println("deviceId: " + resultSet.getString("deviceId")+"ticket _number"+resultSet.getLong("ticket_number"));
             }
 
             // Close the connection
